@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="@color/brown"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProductView">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:backgroundTint="@color/darkbrown">
+
+                <ImageView
+                    android:id="@+id/back_Btn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/left_arrow_icon"
+                    android:backgroundTint="@color/brown"
+                    android:layout_marginTop="10dp"/>
+
+                <ImageView
+                    android:id="@+id/product_picture"
+                    android:layout_width="180dp"
+                    android:layout_height="200dp"
+                    android:background="@drawable/wovenbasket_removebg_preview__1_"
+                    android:layout_gravity="center"/>
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/product_discPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₱ 199"
+                android:textSize="30sp"
+                android:textColor="@color/darkbrown"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/product_origPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₱499"
+                android:textColor="@color/grey"
+                android:textSize="20sp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="15dp"/>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:background="@drawable/line_icon"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/sold_counter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1.1k sold"
+                android:textColor="@color/darkbrown"
+                android:textSize="20sp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="65dp"
+                android:layout_marginTop="15dp"/>
+
+            <ImageView
+                android:id="@+id/fav_Btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/heart_icon"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="@color/darkbrown"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/product_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Classic Woven Basket"
+                android:textSize="22sp"
+                android:textColor="@color/darkbrown"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="• Sturdy • Comfortable • Stylish • Versatile"
+                android:textColor="@color/darkbrown"
+                android:textSize="16sp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="@drawable/line_icon"
+                android:backgroundTint="@color/darkbrown"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/delivery_timespan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/truck_icon"
+                android:backgroundTint="@color/darkbrown"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Guaranteed to get by Apr 18 - 23"
+                android:textSize="17sp"
+                android:textColor="@color/darkbrown"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="70dp"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/right_arrow_icon"
+                android:backgroundTint="@color/darkbrown"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="10dp"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="@drawable/line_icon"
+                android:backgroundTint="@color/darkbrown"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/rate_percent_counter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.5"
+                android:textSize="30sp"
+                android:textColor="@color/darkbrown"
+                android:layout_marginLeft="15dp"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/star_filled_icon"
+                android:backgroundTint="@color/darkbrown"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Product Ratings"
+                android:textColor="@color/darkbrown"
+                android:textSize="17sp"
+                android:layout_marginLeft="90dp"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/rates_counter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(949)"
+                android:textColor="@color/darkbrown"
+                android:textSize="17sp"
+                android:layout_marginLeft="215dp"
+                android:layout_marginTop="8dp"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/right_arrow_icon"
+                android:backgroundTint="@color/darkbrown"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"/>
+
+
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/buyBtn"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:strokeColor="@color/darkbrown"
+                app:strokeWidth="2dp"
+                android:backgroundTint="@color/brown"
+                android:layout_marginHorizontal="55dp"
+                android:layout_marginTop="250dp"
+                app:cardCornerRadius="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Buy with Vouchers"
+                    android:textStyle="bold"
+                    android:textSize="23sp"
+                    android:textColor="@color/darkbrown"
+                    android:layout_gravity="center"/>
+
+            </com.google.android.material.card.MaterialCardView>
+            
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

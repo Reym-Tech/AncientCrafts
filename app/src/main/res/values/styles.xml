@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="PopupMenuStyle" parent="ThemeOverlay.Material3.Light">
+        <!-- Text color for menu items -->
+        <item name="android:textColor">@color/brown</item>
+
+        <!-- Background color for the popup menu -->
+        <item name="android:colorBackground">@color/lightbrown</item>
+
+        <!-- Background color for selected menu items -->
+        <item name="android:colorControlHighlight">@color/darkbrown</item>
+
+        <!-- Elevation for the popup menu -->
+        <item name="android:elevation">8dp</item>
+
+        <!-- Corner radius for the popup menu -->
+        <item name="android:popupMenuStyle">@style/PopupMenu.RoundedCorners</item>
+    </style>
+
+    <style name="PopupMenu.RoundedCorners" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@drawable/popup_menu_background</item>
+    </style>
+</resources>

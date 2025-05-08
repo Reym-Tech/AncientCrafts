@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightbrown"
+    tools:context=".RegisterActivity">
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/profileRLOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/logo"/>
+
+            <TextView
+                android:paddingTop="30dp"
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Register to explore craftmanship."
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="22dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:paddingTop="50dp">
+
+                <EditText
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/etFirstName"
+                    android:background="@drawable/custom_edittext"
+                    android:drawablePadding="8dp"
+                    android:hint="First name"
+                    android:textColorHint="@color/darkbrown"
+                    android:padding="15dp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/cardview_dark_background" />
+
+                <EditText
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/etLastName"
+                    android:background="@drawable/custom_edittext"
+                    android:drawablePadding="8dp"
+                    android:hint="Last name"
+                    android:textColorHint="@color/darkbrown"
+                    android:padding="15dp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/cardview_dark_background"/>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="305dp"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_edittext"
+                android:drawablePadding="8dp"
+                android:ems="10"
+                android:hint="Email"
+                android:textColorHint="@color/darkbrown"
+                android:inputType="textEmailAddress"
+                android:layout_marginTop="5dp"
+                android:padding="15dp"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/cardview_dark_background" />
+
+            <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="305dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="phone"
+                android:background="@drawable/custom_edittext"
+                android:drawablePadding="8dp"
+                android:hint="Phone number"
+                android:textColorHint="@color/darkbrown"
+                android:padding="15dp"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/cardview_dark_background"
+                android:layout_marginTop="5dp" />
+
+                <EditText
+                    android:layout_width="305dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/etPassword"
+                    android:background="@drawable/custom_edittext"
+                    android:drawablePadding="8dp"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:textColorHint="@color/darkbrown"
+                    android:padding="15dp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/cardview_dark_background"
+                    android:layout_marginTop="5dp"/>
+
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="305dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/darkbrown"
+                android:text="Register"
+                android:textColor="@color/lightbrown"
+                android:textSize="22sp"
+                app:cornerRadius="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="------------OR------------"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:textColor="@color/darkbrown"/>
+
+            <LinearLayout
+                android:paddingTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/fb_Btn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/fblogo" />
+
+                <ImageView
+                    android:id="@+id/google_Btn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="50dp"
+                    android:background="@drawable/googlelogo" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvLoginLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Already have an account? Login here"
+                android:textColor="#0000FF"
+                android:textSize="17dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="15dp"
+                    android:textAlignment="center"
+                    android:text="By registering, you agree with our
+                Terms of Service and Privacy Policy"
+                    android:textColor="@color/black"
+                    android:textSize="17dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
