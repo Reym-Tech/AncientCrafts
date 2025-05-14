@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.example.ancientcrafts.MainActivity;
 import com.example.ancientcrafts.R;
+import com.example.ancientcrafts.AddProductActivity;
+import com.google.android.material.card.MaterialCardView;
 
 public class ProfilePage extends Fragment {
 
@@ -21,8 +23,15 @@ public class ProfilePage extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile_page, container, false);
 
+        MaterialCardView sellBtn = view.findViewById(R.id.sellBtn);
+
         ImageView menuBtn = view.findViewById(R.id.menu_Btn);
         menuBtn.setOnClickListener(v -> showPopupMenu(v));
+
+        sellBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), AddProductActivity.class);
+            startActivity(intent);
+        });
 
         return view;
     }
