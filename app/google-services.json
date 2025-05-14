@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "761399719713",
+    "project_id": "ancientcraftsdb",
+    "storage_bucket": "ancientcraftsdb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761399719713:android:7e52c94c99c0be4f603060",
+        "android_client_info": {
+          "package_name": "com.example.ancientcrafts"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCx93IG1fSd7Cko98hRIRbkgcwJVVnKGu4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

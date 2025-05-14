@@ -28,14 +28,6 @@
                     android:layout_height="60dp"
                     android:backgroundTint="@color/darkbrown">
 
-                    <ImageView
-                        android:id="@+id/back_Btn"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/left_arrow_icon"
-                        android:backgroundTint="@color/brown"
-                        android:layout_gravity="center_vertical"/>
-
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -44,12 +36,12 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Notifications"
-                            android:textSize="25dp"
-                            android:textColor="@color/brown"
-                            android:textStyle="bold"
                             android:layout_alignParentRight="true"
-                            android:paddingRight="10dp"/>
+                            android:paddingRight="10dp"
+                            android:text="Notifications"
+                            android:textColor="@color/brown"
+                            android:textSize="25dp"
+                            android:textStyle="bold" />
 
                     </RelativeLayout>
 

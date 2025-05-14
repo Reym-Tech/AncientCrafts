@@ -21,6 +21,14 @@
             android:theme="@style/splash"/>
         <activity android:name=".HomeActivity"
             android:exported="false"/>
+        <activity android:name=".GetStartedActivity"
+            android:exported="false"/>
+        <activity android:name=".GetStartedActivityTwo"
+            android:exported="false"/>
+        <activity android:name=".GetStartedActivityThree"
+            android:exported="false"/>
+        <activity android:name=".GetStartedActivityFour"
+            android:exported="false"/>
         <activity
             android:name=".ProductView"
             android:exported="false" />

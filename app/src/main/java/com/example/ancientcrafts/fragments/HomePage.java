@@ -1,146 +1,83 @@
 package com.example.ancientcrafts.fragments;
 
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ancientcrafts.ProductAdapter;
-import com.example.ancientcrafts.ProductView;
 import com.example.ancientcrafts.R;
+import com.example.ancientcrafts.adapters.ProductAdapter;
 import com.example.ancientcrafts.models.Product;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomePage extends Fragment {
-    private GridLayout productsGrid;
+    private RecyclerView productsRecyclerView;
+    private ProductAdapter productAdapter;
     private List<Product> productList = new ArrayList<>();
-
-    private RecyclerView productsGrid1;
-    private ProductAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragmenthomepage, container, false);
 
-        productsGrid = view.findViewById(R.id.products_grid);
+        // Initialize RecyclerView
+        productsRecyclerView = view.findViewById(R.id.products_grid);
+        setupRecyclerView();
 
-        // Load products from database
-        new LoadProductsTask().execute();
+        // Load products from Firebase
+        loadProductsFromFirebase();
 
         return view;
-
     }
 
-    private class LoadProductsTask extends AsyncTask<Void, Void, List<Product>> {
-        @Override
-        protected List<Product> doInBackground(Void... voids) {
-            List<Product> products = new ArrayList<>();
+    private void setupRecyclerView() {
+        // Grid layout with 2 columns
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+        productsRecyclerView.setLayoutManager(layoutManager);
 
-            try {
-                URL url = new URL("http://192.168.137.228/db_test_php/get_products.php");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-                conn.setConnectTimeout(5000); // 5 seconds timeout
-                conn.setReadTimeout(5000);
+        // Initialize adapter
+        productAdapter = new ProductAdapter(productList, getContext(), R.drawable.placeholder_image);
+        productsRecyclerView.setAdapter(productAdapter);
+    }
 
-                int responseCode = conn.getResponseCode();
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    BufferedReader reader = new BufferedReader(
-                            new InputStreamReader(conn.getInputStream()));
+    private void loadProductsFromFirebase() {
+        // Get a reference to your Firebase Realtime Database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference productsRef = database.getReference("products");
 
-                    StringBuilder jsonResults = new StringBuilder();
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        jsonResults.append(line);
-                    }
-                    reader.close();
-
-                    // Parse JSON response
-                    JSONArray jsonArray = new JSONArray(jsonResults.toString());
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject obj = jsonArray.getJSONObject(i);
-                        products.add(new Product(
-                                obj.getInt("id"),
-                                obj.getString("name"),
-                                obj.getString("image_name"),
-                                obj.getDouble("price")
-                        ));
+        // Set up the listener to fetch data
+        productsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                productList.clear();
+                for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+                    // Convert the snapshot into a Product object
+                    Product product = productSnapshot.getValue(Product.class);
+                    if (product != null) {
+                        productList.add(product);
                     }
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+                // Notify the adapter to update the UI  
+                productAdapter.notifyDataSetChanged();
             }
-            return products;
-        }
 
-        @Override
-        protected void onPostExecute(List<Product> products) {
-            if (getActivity() != null && isAdded()) { // Check if fragment is still attached
-                productList = products;
-                if (productList.isEmpty()) {
-                    // Show empty state or error message
-                } else {
-                    displayProducts();
-                }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), "Failed to load products: " + error.getMessage(), Toast.LENGTH_LONG).show();
             }
-        }
+        });
     }
-
-    private void displayProducts() {
-        productsGrid.removeAllViews();
-
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-
-        for (Product product : productList) {
-            // Inflate product card layout
-            View productCard = inflater.inflate(R.layout.product_card, productsGrid, false);
-
-            // Set product data
-            ImageView productImage = productCard.findViewById(R.id.product_image);
-            TextView productName = productCard.findViewById(R.id.product_name);
-            TextView productPrice = productCard.findViewById(R.id.product_price);
-
-            // Get resource ID for image
-            int resId = getResources().getIdentifier(
-                    product.getImageName(),
-                    "drawable",
-                    requireContext().getPackageName()
-            );
-
-            productImage.setImageResource(resId);
-            productName.setText(product.getName());
-            productPrice.setText(String.format("₱%.2f", product.getPrice()));
-
-            // Set click listener
-            productCard.setOnClickListener(v -> {
-                // Handle product click
-                Intent intent = new Intent(getActivity(), ProductView.class);
-                intent.putExtra("product_id", product.getId());
-                startActivity(intent);
-            });
-
-            // Add to grid
-            productsGrid.addView(productCard);
-        }
-
-    }
-
 }

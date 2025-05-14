@@ -8,12 +8,17 @@ public class Product implements Parcelable {
     private String name;
     private String imageName;
     private double price;
-    private double originalPrice; // New field
-    private int soldCount;       // New field
-    private float rating;       // New field
-    private int reviewCount;    // New field
-    private String description; // New field
-    private String deliveryEstimate; // New field
+    private double originalPrice;
+    private int soldCount;
+    private float rating;
+    private int reviewCount;
+    private String description;
+    private String deliveryEstimate;
+
+    // No-argument constructor required for Firebase
+    public Product() {
+        // Default constructor for Firebase
+    }
 
     // Original constructor (for dashboard compatibility)
     public Product(int id, String name, String imageName, double price) {
@@ -29,7 +34,7 @@ public class Product implements Parcelable {
         this.deliveryEstimate = "3-5 days";
     }
 
-    // New full constructor
+    // Full constructor with all fields
     public Product(int id, String name, String imageName, double price,
                    double originalPrice, int soldCount, float rating,
                    int reviewCount, String description, String deliveryEstimate) {
@@ -90,7 +95,7 @@ public class Product implements Parcelable {
         dest.writeString(deliveryEstimate);
     }
 
-    // Enhanced getters
+    // Getters for all fields
     public int getId() { return id; }
     public String getName() { return name; }
     public String getImageName() { return imageName; }
@@ -102,8 +107,8 @@ public class Product implements Parcelable {
     public String getDescription() { return description; }
     public String getDeliveryEstimate() { return deliveryEstimate; }
 
-    // Image URL helper
+    // Helper method for image URL
     public String getImageUrl() {
-        return "http://192.168.8.38/your_images/" + imageName;
+        return "http://20.0.0.176/AncientCrafts_productImg/" + imageName;
     }
 }

@@ -7,7 +7,8 @@
     android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
     app:strokeColor="@color/darkbrown"
-    app:strokeWidth="1dp">
+    app:strokeWidth="1dp"
+    android:backgroundTint="@color/darkbrown">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:textColor="@color/darkbrown"
+                android:textColor="@color/brown"
                 android:textStyle="bold"
                 android:maxLines="1"
                 android:ellipsize="end"/>
@@ -52,7 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:textColor="@color/darkbrown"
+                    android:textColor="@color/brown"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -74,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
-                    android:textColor="@color/darkbrown"/>
+                    android:textColor="@color/brown"/>
             </LinearLayout>
 
             <!-- Rating Row -->
@@ -95,7 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
-                    android:textColor="@color/darkbrown"
+                    android:textColor="@color/brown"
                     android:layout_marginStart="4dp"/>
 
                 <TextView
@@ -103,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
-                    android:textColor="@color/darkbrown"
+                    android:textColor="@color/brown"
                     android:layout_marginStart="4dp"/>
             </LinearLayout>
         </LinearLayout>
