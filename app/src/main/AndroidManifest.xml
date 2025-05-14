@@ -20,6 +20,12 @@
             android:name=".AddProductActivity"
             android:exported="false" />
         <activity
+            android:name=".FavoriteProducts"
+            android:exported="false" />
+        <activity
+            android:name=".CartProducts"
+            android:exported="false" />
+        <activity
             android:name=".Splashie"
             android:exported="true"
             android:theme="@style/splash" />

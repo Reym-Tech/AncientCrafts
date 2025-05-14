@@ -1,48 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddProductActivity">
+    android:background="@color/brown"
+    android:fillViewport="true">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp">
+        android:orientation="vertical"
+        android:gravity="top">
 
+        <!-- Top Profile Section -->
+        <RelativeLayout
+            android:id="@+id/profile_DB"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:background="@color/darkbrown"
+            android:layout_marginBottom="50dp">
+
+            <ImageView
+                android:id="@+id/menu_Btn"
+                android:layout_width="25dp"
+                android:layout_height="35dp"
+                android:background="@drawable/menu_icon"
+                android:backgroundTint="@color/brown"
+                android:layout_margin="15dp" />
+
+            <ImageView
+                android:id="@+id/profile_pic"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/baseline_account_circle_24"
+                android:backgroundTint="@color/brown"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="60dp" />
+
+            <TextView
+                android:id="@+id/email_holder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="gjohnremy@gmail.com"
+                android:textColor="@color/brown"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="65dp" />
+
+            <TextView
+                android:id="@+id/number_holder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="096*****520"
+                android:textColor="@color/brown"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="85dp" />
+
+            <ImageView
+                android:id="@+id/fav_Btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/favourite_icon"
+                android:backgroundTint="@color/brown"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="115dp"
+                android:layout_marginTop="17dp" />
+
+            <ImageView
+                android:id="@+id/cart_Btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/cart"
+                android:backgroundTint="@color/brown"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="65dp"
+                android:layout_marginTop="18dp" />
+
+            <ImageView
+                android:id="@+id/message_Btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/message_icon"
+                android:backgroundTint="@color/brown"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="17dp" />
+        </RelativeLayout>
+
+        <!-- Input Section -->
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
 
+            <!-- Product Name -->
             <EditText
                 android:id="@+id/edit_name"
-                android:hint="Product Name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="Product Name"
+                android:backgroundTint="@color/darkbrown"
+                android:textColor="@color/darkbrown"
+                android:layout_marginBottom="16dp" />
 
+            <!-- Product Price -->
             <EditText
                 android:id="@+id/edit_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:hint="Price"
                 android:inputType="numberDecimal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:backgroundTint="@color/darkbrown"
+                android:textColor="@color/darkbrown"
+                android:layout_marginBottom="16dp" />
 
+            <!-- Image URL -->
             <EditText
                 android:id="@+id/edit_image_url"
-                android:hint="Image URL (https://...)"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="Image URL (https://...)"
+                android:backgroundTint="@color/darkbrown"
+                android:textColor="@color/darkbrown"
+                android:layout_marginBottom="16dp" />
 
+            <!-- Add Product Button -->
             <Button
                 android:id="@+id/btn_submit"
-                android:text="Add Product"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="Add Product"
+                android:textStyle="bold"
+                android:textColor="@color/brown"
+                android:backgroundTint="@color/darkbrown"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Restock Product Button -->
+            <Button
+                android:id="@+id/btn_restock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Restock Product"
+                android:textStyle="bold"
+                android:textColor="@color/brown"
+                android:backgroundTint="@color/darkbrown"
+                android:layout_marginBottom="24dp" />
+
         </LinearLayout>
-    </ScrollView>
 
+        <!-- Products Section -->
+        <LinearLayout
+            android:id="@+id/products_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Title for Products -->
+            <TextView
+                android:id="@+id/your_products_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Your Products"
+                android:textColor="@color/darkbrown"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- RecyclerView to display seller's products -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_products"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:layout_marginBottom="24dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

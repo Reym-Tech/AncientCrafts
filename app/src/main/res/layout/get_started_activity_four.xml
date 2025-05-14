@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:text="LET’S"
                 android:textColor="#FFF8E1"
-                android:textSize="50sp"
+                android:textSize="40sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:text="GET"
                 android:textColor="#FFF8E1"
-                android:textSize="50sp"
+                android:textSize="40sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -102,8 +102,9 @@
                 android:layout_height="wrap_content"
                 android:text="STARTED"
                 android:textColor="#FFF8E1"
-                android:textSize="50sp"
+                android:textSize="40sp"
                 android:textStyle="bold" />
+
         </LinearLayout>
 
         <!-- Arrow Button -->
@@ -119,5 +120,36 @@
             android:scaleType="centerInside"
             android:src="@drawable/next_arrow"
             app:tint="#F1E7C6" />
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/dot_icon"
+            android:backgroundTint="@color/brown"
+            android:layout_marginTop="160dp"
+            android:layout_marginLeft="230dp"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/dot_icon"
+            android:backgroundTint="@color/brown"
+            android:layout_marginTop="160dp"
+            android:layout_marginLeft="250dp"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/dot_icon"
+            android:backgroundTint="@color/brown"
+            android:layout_marginTop="160dp"
+            android:layout_marginLeft="270dp"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/dot_icon"
+            android:backgroundTint="@color/lightbrown"
+            android:layout_marginTop="160dp"
+            android:layout_marginLeft="290dp"/>
     </RelativeLayout>
 </LinearLayout>
