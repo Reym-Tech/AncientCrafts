@@ -2,6 +2,7 @@ package com.example.ancientcrafts;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 
@@ -20,9 +21,16 @@ public class GetStartedActivityFour extends AppCompatActivity {
 
         ImageButton nextButton = findViewById(R.id.next_button_4);
         nextButton.setOnClickListener(v -> {
-            Intent intent = new Intent(GetStartedActivityFour.this, MainActivity.class);
-            startActivity(intent);
-            finish(); // Prevent returning to Welcome screen on back press
+            navigateToMain();
         });
+
+        // Optionally navigate automatically after 3 seconds
+        new Handler().postDelayed(this::navigateToMain, 3000);
+    }
+
+    private void navigateToMain() {
+        Intent intent = new Intent(GetStartedActivityFour.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

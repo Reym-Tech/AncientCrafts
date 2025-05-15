@@ -1,6 +1,7 @@
 package com.example.ancientcrafts.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,14 +43,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.nameTextView.setText(product.getName());
         holder.priceTextView.setText("₱" + String.format("%.2f", product.getPrice()));
 
-        // Load product image from Firebase or other hosted URL
-        String imageUrl = product.getImageUrl(); // Make sure this returns a full URL
-
+        String imageUrl = product.getImageUrl();
         Glide.with(context)
                 .load(imageUrl)
                 .placeholder(placeholderImageResId)
                 .error(placeholderImageResId)
                 .into(holder.productImage);
+
+        // 👇 Click-to-view full product
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, com.example.ancientcrafts.ProductView.class);
+            intent.putExtra("product", product); // Pass the whole Product object
+            context.startActivity(intent);
+        });
     }
 
     @Override
