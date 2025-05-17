@@ -109,6 +109,6 @@ public class Product implements Parcelable {
 
     // Helper method for image URL
     public String getImageUrl() {
-        return "http://20.0.0.176/AncientCrafts_productImg/" + imageName;
+        return "http://10.10.10.173/AncientCrafts_productImg/" + imageName;
     }
 }

@@ -116,17 +116,26 @@
                 android:textColor="@color/darkbrown"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Image URL -->
-            <EditText
-                android:id="@+id/edit_image_url"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Image URL (https://...)"
-                android:backgroundTint="@color/darkbrown"
-                android:textColor="@color/darkbrown"
+            <!-- Image Preview -->
+            <ImageView
+                android:id="@+id/image_preview"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@color/white"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Add Product Button -->
+            <!-- Choose Image Button -->
+            <Button
+                android:id="@+id/btn_choose_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose Image"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Submit Button -->
             <Button
                 android:id="@+id/btn_submit"
                 android:layout_width="wrap_content"
@@ -137,7 +146,7 @@
                 android:backgroundTint="@color/darkbrown"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Restock Product Button -->
+            <!-- Restock Button -->
             <Button
                 android:id="@+id/btn_restock"
                 android:layout_width="wrap_content"
@@ -147,7 +156,6 @@
                 android:textColor="@color/brown"
                 android:backgroundTint="@color/darkbrown"
                 android:layout_marginBottom="24dp" />
-
         </LinearLayout>
 
         <!-- Products Section -->
