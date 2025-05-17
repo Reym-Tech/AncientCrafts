@@ -10,14 +10,14 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/addToCartSection">
 
-        <!-- Replace with your actual product layout -->
         <LinearLayout
+            android:id="@+id/cart_product_list_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <!-- Product content here -->
-        </LinearLayout>
+            android:orientation="vertical"
+            android:padding="16dp" />
     </ScrollView>
+
 
     <!-- Add to Cart Section fixed at the bottom -->
     <LinearLayout

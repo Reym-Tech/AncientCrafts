@@ -20,13 +20,13 @@ public class Product implements Parcelable {
         // Default constructor for Firebase
     }
 
-    // Original constructor (for dashboard compatibility)
+    // Constructor for dashboard or minimal product info
     public Product(int id, String name, String imageName, double price) {
         this.id = id;
         this.name = name;
         this.imageName = imageName;
         this.price = price;
-        this.originalPrice = price * 1.5; // Default calculation
+        this.originalPrice = price * 1.5; // Default mark-up
         this.soldCount = 0;
         this.rating = 4.0f;
         this.reviewCount = 0;
@@ -50,7 +50,7 @@ public class Product implements Parcelable {
         this.deliveryEstimate = deliveryEstimate;
     }
 
-    // Parcelable implementation
+    // Parcelable constructor
     protected Product(Parcel in) {
         id = in.readInt();
         name = in.readString();
@@ -64,6 +64,7 @@ public class Product implements Parcelable {
         deliveryEstimate = in.readString();
     }
 
+    // Parcelable creator
     public static final Creator<Product> CREATOR = new Creator<Product>() {
         @Override
         public Product createFromParcel(Parcel in) {
@@ -76,6 +77,7 @@ public class Product implements Parcelable {
         }
     };
 
+    // Parcelable methods
     @Override
     public int describeContents() {
         return 0;
@@ -95,20 +97,49 @@ public class Product implements Parcelable {
         dest.writeString(deliveryEstimate);
     }
 
-    // Getters for all fields
-    public int getId() { return id; }
-    public String getName() { return name; }
-    public String getImageName() { return imageName; }
-    public double getPrice() { return price; }
-    public double getOriginalPrice() { return originalPrice; }
-    public int getSoldCount() { return soldCount; }
-    public float getRating() { return rating; }
-    public int getReviewCount() { return reviewCount; }
-    public String getDescription() { return description; }
-    public String getDeliveryEstimate() { return deliveryEstimate; }
+    // Getters
+    public int getId() {
+        return id;
+    }
 
-    // Helper method for image URL
+    public String getName() {
+        return name;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public double getOriginalPrice() {
+        return originalPrice;
+    }
+
+    public int getSoldCount() {
+        return soldCount;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public int getReviewCount() {
+        return reviewCount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getDeliveryEstimate() {
+        return deliveryEstimate;
+    }
+
+    // Helper method for loading image from server
     public String getImageUrl() {
-        return "http://20.0.0.176/AncientCrafts_productImg/" + imageName;
+        return "http://192.168.8.41/AncientCrafts_productImg/" + imageName;
     }
 }
