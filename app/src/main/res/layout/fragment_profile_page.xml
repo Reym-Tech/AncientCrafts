@@ -31,7 +31,7 @@
                 android:backgroundTint="@color/brown" />
 
             <ImageView
-                android:id="@+id/profile_pic"
+                android:id="@+id/profile_picture"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="50dp"
@@ -40,12 +40,33 @@
                 android:backgroundTint="@color/brown" />
 
             <TextView
-                android:id="@+id/email_holder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="20dp"
+                android:text="Hi!"
+                android:textSize="18sp"
+                android:textColor="@color/brown"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/profile_firstName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="20dp"
+                android:text="Name"
+                android:textSize="18sp"
+                android:textColor="@color/brown"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/profile_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="110dp"
                 android:layout_marginTop="65dp"
-                android:text="gjohnremy@gmail.com"
+                android:text="Email"
                 android:textColor="@color/brown" />
 
             <TextView
@@ -54,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="110dp"
                 android:layout_marginTop="85dp"
-                android:text="096*****520"
+                android:text="Phone Number"
                 android:textColor="@color/brown" />
 
             <ImageView
