@@ -21,4 +21,11 @@
     <style name="PopupMenu.RoundedCorners" parent="Widget.AppCompat.PopupMenu">
         <item name="android:popupBackground">@drawable/popup_menu_background</item>
     </style>
+
+    <style name="MyPopupMenuStyle" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:popupBackground">@drawable/custom_popup_background</item>
+        <item name="android:colorBackground">@color/lightbrown</item>
+        <item name="android:textColor">@color/darkerbrown</item>
+    </style>
+
 </resources>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup_filter_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/popup_menu_background"
+    android:padding="12dp">
+
+    <CheckBox
+        android:id="@+id/check_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="All"
+        android:textColor="@color/darkerbrown"
+        android:buttonTint="@color/brown" />
+
+    <CheckBox
+        android:id="@+id/check_newest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Newest"
+        android:textColor="@color/darkerbrown"
+        android:buttonTint="@color/brown" />
+
+    <CheckBox
+        android:id="@+id/check_price_low_high"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price: Low to High"
+        android:textColor="@color/darkerbrown"
+        android:buttonTint="@color/brown" />
+
+    <CheckBox
+        android:id="@+id/check_price_high_low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price: High to Low"
+        android:textColor="@color/darkerbrown"
+        android:buttonTint="@color/brown" />
+
+    <CheckBox
+        android:id="@+id/check_top_rated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Top Rated"
+        android:textColor="@color/darkerbrown"
+        android:buttonTint="@color/brown" />
+
+    <Button
+        android:id="@+id/btn_apply_filters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Apply"
+        android:textColor="@color/lightbrown"
+        android:backgroundTint="@color/darkbrown"
+        android:layout_marginTop="12dp" />
+
+</LinearLayout>

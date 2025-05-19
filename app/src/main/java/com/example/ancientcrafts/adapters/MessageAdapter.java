@@ -27,9 +27,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     @Override
     public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.chat_activity, parent, false);
+                .inflate(R.layout.item_chat_message, parent, false);
         return new MessageViewHolder(view);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
@@ -60,7 +61,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         public MessageViewHolder(@NonNull View itemView) {
             super(itemView);
-            messageText = itemView.findViewById(R.id.messageInput);
+            messageText = itemView.findViewById(R.id.messageText);
         }
+
     }
 }

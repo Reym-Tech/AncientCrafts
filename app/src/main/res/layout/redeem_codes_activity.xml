@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/brown"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Enter Code to Redeem"
+        android:textSize="22sp"
+        android:textColor="@color/darkbrown"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp" />
+
+    <EditText
+        android:id="@+id/redeemCodeInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your code here"
+        android:padding="10dp"
+        android:backgroundTint="@color/darkbrown"
+        android:textColor="@color/darkerbrown"
+        android:textColorHint="@color/darkerbrown"/>
+
+    <Button
+        android:id="@+id/redeemButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Redeem"
+        android:textColor="@color/lightbrown"
+        android:backgroundTint="@color/darkbrown"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"/>
+</LinearLayout>

@@ -49,6 +49,8 @@ dependencies {
     implementation(libs.material)
     implementation("com.google.android.material:material:1.12.0") // Explicit version (can be removed if libs.material has same)
 
+    implementation("androidx.appcompat:appcompat:1.6.1")//for address
+
     // UI Layouts
     implementation(libs.constraintlayout)
     implementation("androidx.cardview:cardview:1.0.0")

@@ -9,235 +9,63 @@
     tools:context=".fragments.NotificationPage">
 
     <LinearLayout
+        android:id="@+id/containerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="top"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:backgroundTint="@color/darkbrown">
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:paddingRight="10dp"
-                            android:text="Notifications"
-                            android:textColor="@color/brown"
-                            android:textSize="25dp"
-                            android:textStyle="bold" />
-
-                    </RelativeLayout>
-
-                </androidx.cardview.widget.CardView>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Today"
-                        android:textSize="20dp"
-                        android:textColor="@color/darkbrown"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginTop="20dp"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/person_chat1"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:backgroundTint="@color/darkbrown"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="8dp">
-
-                    <ImageView
-                        android:id="@+id/person_chat1_profile"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/baseline_account_circle_24"
-                        android:backgroundTint="@color/brown"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="10dp"/>
-
-                    <TextView
-                        android:id="@+id/person_chat1_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Franconat Wood Crafts"
-                        android:textColor="@color/brown"
-                        android:textSize="16sp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="7dp"
-                        android:layout_marginRight="9dp"/>
-
-                    <TextView
-                        android:id="@+id/person_chat1_msg"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Your Text Messages"
-                        android:textColor="@color/brown"
-                        android:textSize="13sp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginRight="34dp"/>
-
-                    <TextView
-                        android:id="@+id/person_chat1_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="4:22 AM"
-                        android:textColor="@color/brown"
-                        android:textSize="13sp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="40dp"
-                        android:layout_marginLeft="120dp"/>
-
-                </androidx.cardview.widget.CardView>
-
-            </RelativeLayout>
-
-        <RelativeLayout
+        <!-- Header Bar -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:backgroundTint="@color/darkbrown"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="4dp">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/person_chat2"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:backgroundTint="@color/darkbrown"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="8dp">
-
-                <ImageView
-                    android:id="@+id/person_chat2_profile"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/baseline_account_circle_24"
-                    android:backgroundTint="@color/brown"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"/>
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
 
                 <TextView
-                    android:id="@+id/person_chat2_name"
+                    android:id="@+id/titleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Reuel Lambayot Works"
+                    android:layout_centerInParent="true"
+                    android:text="Notifications"
                     android:textColor="@color/brown"
-                    android:textSize="16sp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginRight="10dp"/>
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:id="@+id/person_chat2_msg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Your Text Messages"
-                    android:textColor="@color/brown"
-                    android:textSize="13sp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginRight="34dp"/>
+        <!-- Today label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:text="Today"
+            android:textColor="@color/darkbrown"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/person_chat2_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="4:22 AM"
-                    android:textColor="@color/brown"
-                    android:textSize="13sp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginLeft="120dp"/>
-
-            </androidx.cardview.widget.CardView>
-
-        </RelativeLayout>
-
-        <RelativeLayout
+        <!-- RecyclerView for notifications -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/notificationRecycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/person_chat3"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:backgroundTint="@color/darkbrown"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="8dp">
-
-                <ImageView
-                    android:id="@+id/person_chat3_profile"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/baseline_account_circle_24"
-                    android:backgroundTint="@color/brown"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"/>
-
-                <TextView
-                    android:id="@+id/person_chat3_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Jade Cancerous Traits"
-                    android:textColor="@color/brown"
-                    android:textSize="16sp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginRight="12dp"/>
-
-                <TextView
-                    android:id="@+id/person_chat3_msg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Your Text Messages"
-                    android:textColor="@color/brown"
-                    android:textSize="13sp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginRight="34dp"/>
-
-                <TextView
-                    android:id="@+id/person_chat3_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="4:22 AM"
-                    android:textColor="@color/brown"
-                    android:textSize="13sp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginLeft="120dp"/>
-
-            </androidx.cardview.widget.CardView>
-
-        </RelativeLayout>
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:paddingHorizontal="16dp"
+            android:clipToPadding="false"
+            tools:listitem="@layout/item_notification" />
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

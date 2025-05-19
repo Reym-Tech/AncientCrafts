@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_marginVertical="4dp"
+    android:backgroundTint="@color/darkbrown"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- optional buyer avatar / generic icon -->
+        <ImageView
+            android:id="@+id/person_chat_profile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/baseline_account_circle_24"
+            android:backgroundTint="@color/brown" />
+
+        <!-- buyer name or “Someone” -->
+        <TextView
+            android:id="@+id/person_chat_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_alignTop="@id/person_chat_profile"
+            android:layout_toEndOf="@id/person_chat_profile"
+            android:text="Buyer Name"
+            android:textColor="@color/brown"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!-- short message (“bought ‘Product X’”) -->
+        <TextView
+            android:id="@+id/person_chat_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/person_chat_name"
+            android:layout_alignStart="@id/person_chat_name"
+            android:text="bought Your Product"
+            android:textColor="@color/brown"
+            android:textSize="13sp" />
+
+        <!-- time stamp -->
+        <TextView
+            android:id="@+id/person_chat_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="12dp"
+            android:text="4:22 AM"
+            android:textColor="@color/brown"
+            android:textSize="13sp" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

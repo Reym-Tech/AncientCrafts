@@ -1,7 +1,6 @@
 package com.example.ancientcrafts;
 
 import android.os.Bundle;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,20 +10,34 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
+import com.example.ancientcrafts.models.Notification;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import com.bumptech.glide.Glide;
 import com.example.ancientcrafts.models.Product;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Order extends AppCompatActivity {
 
-    private TextView deliveryAddress, productName, productPrice, subtotalText, shippingText, totalText, checkoutTotalPrice;
+    private TextView deliveryAddress, productName, productPrice,
+            subtotalText, shippingText, totalText, checkoutTotalPrice;
     private ImageView productImage;
     private EditText voucherCodeInput;
     private Button applyVoucherBtn, btnPlaceOrder;
     private RadioGroup paymentMethodGroup;
+    private CardView cardDeliveryAddress;
 
-    private double shippingFee = 40.00; // default shipping fee
+    private double shippingFee = 40.00;      // default shipping fee
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +47,7 @@ public class Order extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        // Bind views from XML
+        /* ---------- bind views ---------- */
         deliveryAddress = findViewById(R.id.deliveryAddress);
         productName = findViewById(R.id.checkoutProductName);
         productPrice = findViewById(R.id.checkoutProductPrice);
@@ -47,16 +60,55 @@ public class Order extends AppCompatActivity {
         applyVoucherBtn = findViewById(R.id.applyVoucherBtn);
         btnPlaceOrder = findViewById(R.id.btnPlaceOrder);
         paymentMethodGroup = findViewById(R.id.paymentMethodGroup);
+        cardDeliveryAddress = findViewById(R.id.cardDeliveryAddress);   // NEW
 
-        // Get the product from the Intent
+        /* ---------- bottom‑sheet pop‑up for address ---------- */
+        cardDeliveryAddress.setOnClickListener(v -> {                    // NEW
+            ChangeAddressBottomSheet sheet = new ChangeAddressBottomSheet();
+            sheet.setListener(addr -> {
+                deliveryAddress.setText(addr.getFullAddress());
+                /* If shipping varies per address, recalc totals here */
+            });
+            sheet.show(getSupportFragmentManager(), "addrSheet");
+        });
+        /* ----------------------------------------------------- */
+
+        /* ---------- load default address from Firebase ---------- */
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            DatabaseReference userRef = FirebaseDatabase.getInstance()
+                    .getReference("users")
+                    .child(user.getUid());
+
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snap) {
+                    if (snap.exists()) {
+                        String name = snap.child("first_name").getValue(String.class);
+                        String phone = snap.child("phone_number").getValue(String.class);
+                        String addr = snap.child("address").getValue(String.class);
+
+                        String fullAddress = name + "\n" + addr + "\nContact: " + phone;
+                        deliveryAddress.setText(fullAddress);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError e) {
+                    Toast.makeText(Order.this, "Failed to load address", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        /* -------------------------------------------------------- */
+
+        /* ---------- load product passed in Intent ---------- */
         Product product = getIntent().getParcelableExtra("product");
-
         if (product != null) {
-            // Load product data into UI
             productName.setText(product.getName());
             productPrice.setText(String.format("₱%.2f", product.getPrice()));
             subtotalText.setText(String.format("₱%.2f", product.getPrice()));
             shippingText.setText(String.format("₱%.2f", shippingFee));
+
             double total = product.getPrice() + shippingFee;
             totalText.setText(String.format("₱%.2f", total));
             checkoutTotalPrice.setText(String.format("₱%.2f", total));
@@ -69,15 +121,16 @@ public class Order extends AppCompatActivity {
         } else {
             Toast.makeText(this, "No product data received", Toast.LENGTH_SHORT).show();
             finish();
+            return;
         }
+        /* ---------------------------------------------------- */
 
-        // Handle voucher button click
+        /* ---------- voucher button ---------- */
         applyVoucherBtn.setOnClickListener(v -> {
             String voucher = voucherCodeInput.getText().toString().trim();
             if (voucher.equalsIgnoreCase("DISCOUNT10")) {
                 double discount = 10.00;
-                double subtotal = product.getPrice();
-                double total = subtotal + shippingFee - discount;
+                double total = product.getPrice() + shippingFee - discount;
                 totalText.setText(String.format("₱%.2f", total));
                 checkoutTotalPrice.setText(String.format("₱%.2f", total));
                 Toast.makeText(Order.this, "Voucher applied!", Toast.LENGTH_SHORT).show();
@@ -85,15 +138,45 @@ public class Order extends AppCompatActivity {
                 Toast.makeText(Order.this, "Invalid voucher code", Toast.LENGTH_SHORT).show();
             }
         });
+        /* ------------------------------------ */
 
-        // Handle place order button
+        /* ---------- place‑order button ---------- */
         btnPlaceOrder.setOnClickListener(v -> {
-            int selectedId = paymentMethodGroup.getCheckedRadioButtonId();
-            RadioButton selectedMethod = findViewById(selectedId);
-            String paymentMethod = selectedMethod.getText().toString();
+            int id = paymentMethodGroup.getCheckedRadioButtonId();
+            if (id != -1) {
+                String method = ((RadioButton) findViewById(id)).getText().toString();
 
-            Toast.makeText(Order.this, "Order placed using " + paymentMethod, Toast.LENGTH_LONG).show();
-            // Proceed to confirmation or backend logic
+                Toast.makeText(Order.this,
+                        "Order placed using " + method, Toast.LENGTH_LONG).show();
+
+                // --- NEW: Push notification to seller ---
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                String buyerName = "Someone"; // default fallback
+                if (currentUser != null && currentUser.getDisplayName() != null) {
+                    buyerName = currentUser.getDisplayName();
+                }
+
+                // Make sure your Product class has getSellerUid()
+                String sellerUid = product.getSellerUid();
+
+                if (sellerUid != null && !sellerUid.isEmpty()) {
+                    DatabaseReference notifRef = FirebaseDatabase.getInstance()
+                            .getReference("notifications")
+                            .child(sellerUid);
+
+                    Notification notification = new Notification(buyerName, product.getName());
+                    notifRef.push().setValue(notification);
+                } else {
+                    Toast.makeText(Order.this, "Seller ID missing, notification not sent.", Toast.LENGTH_SHORT).show();
+                }
+
+                // TODO: continue to confirmation / API call here if needed
+
+            } else {
+                Toast.makeText(Order.this,
+                        "Please select a payment method", Toast.LENGTH_SHORT).show();
+            }
         });
+
     }
 }

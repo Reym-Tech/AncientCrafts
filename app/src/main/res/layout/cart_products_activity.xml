@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:background="@color/brown">
 
-    <!-- Your product details or scrollable content -->
+    <!-- Scrollable product list -->
     <ScrollView
         android:id="@+id/productScrollView"
         android:layout_width="match_parent"
@@ -18,55 +18,36 @@
             android:padding="16dp" />
     </ScrollView>
 
-
-    <!-- Add to Cart Section fixed at the bottom -->
+    <!-- Updated “Add to Cart” footer -->
     <LinearLayout
         android:id="@+id/addToCartSection"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:padding="10dp"
-        android:background="@color/darkbrown"
-        android:gravity="center_vertical">
+        android:padding="8dp"
+        android:gravity="center_vertical"
+        android:background="@color/darkbrown">
 
-        <ImageView
-            android:id="@+id/favBtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/favourite_icon"
-            android:backgroundTint="@color/brown"
-            android:layout_marginEnd="10dp" />
+    <!-- running total -->
+    <TextView
+        android:id="@+id/cartTotalPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="₱0.00"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/brown" />
 
-        <ImageView
-            android:id="@+id/cartBtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/cart"
-            android:backgroundTint="@color/brown"
-            android:layout_marginEnd="10dp" />
-
-        <Button
-            android:id="@+id/addToCartBtn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.2"
-            android:text="Add to Cart"
-            android:textColor="@color/darkbrown"
-            android:backgroundTint="@color/brown"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:layout_marginEnd="3dp" />
-
-        <Button
-            android:id="@+id/buyNowBtn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Buy Now"
-            android:textColor="@color/darkbrown"
-            android:backgroundTint="@color/brown"
-            android:textStyle="bold"
-            android:textSize="16sp" />
-    </LinearLayout>
-</RelativeLayout>
+    <!-- action button -->
+    <Button
+        android:id="@+id/buyNowBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buy Now"
+        android:textStyle="bold"
+        android:textColor="@color/brown"
+        android:backgroundTint="@color/lightbrown" />
+</LinearLayout>
+    </RelativeLayout>

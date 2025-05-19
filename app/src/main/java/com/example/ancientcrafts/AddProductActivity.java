@@ -101,7 +101,7 @@ public class AddProductActivity extends AppCompatActivity {
 
         StringRequest request = new StringRequest(
                 Request.Method.POST,
-                "http://192.168.8.41/AncientCrafts_productImg/upload.php" ,
+                "http://10.10.10.147/AncientCrafts_productImg/upload.php" ,
                 response -> {
                     dialog.dismiss();
                     String imageUrl = imageName;
