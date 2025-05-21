@@ -14,41 +14,24 @@ public class Product implements Parcelable {
     private int reviewCount;
     private String description;
     private String deliveryEstimate;
-    private String sellerUid;  // NEW field for seller UID
 
     // No-argument constructor required for Firebase
     public Product() {
         // Default constructor for Firebase
     }
 
-    // Constructor for dashboard or minimal product info
+    // Original constructor (for dashboard compatibility)
     public Product(int id, String name, String imageName, double price) {
         this.id = id;
         this.name = name;
         this.imageName = imageName;
         this.price = price;
-        this.originalPrice = price * 1.5; // Default mark-up
+        this.originalPrice = price * 1.5; // Default calculation
         this.soldCount = 0;
         this.rating = 4.0f;
         this.reviewCount = 0;
         this.description = "Premium quality product";
         this.deliveryEstimate = "3-5 days";
-        this.sellerUid = null;
-    }
-
-    // Constructor including sellerUid for dashboard or minimal product info
-    public Product(int id, String name, String imageName, double price, String sellerUid) {
-        this.id = id;
-        this.name = name;
-        this.imageName = imageName;
-        this.price = price;
-        this.originalPrice = price * 1.5; // Default mark-up
-        this.soldCount = 0;
-        this.rating = 4.0f;
-        this.reviewCount = 0;
-        this.description = "Premium quality product";
-        this.deliveryEstimate = "3-5 days";
-        this.sellerUid = sellerUid;
     }
 
     // Full constructor with all fields
@@ -65,28 +48,9 @@ public class Product implements Parcelable {
         this.reviewCount = reviewCount;
         this.description = description;
         this.deliveryEstimate = deliveryEstimate;
-        this.sellerUid = null;
     }
 
-    // Full constructor with all fields including sellerUid
-    public Product(int id, String name, String imageName, double price,
-                   double originalPrice, int soldCount, float rating,
-                   int reviewCount, String description, String deliveryEstimate,
-                   String sellerUid) {
-        this.id = id;
-        this.name = name;
-        this.imageName = imageName;
-        this.price = price;
-        this.originalPrice = originalPrice;
-        this.soldCount = soldCount;
-        this.rating = rating;
-        this.reviewCount = reviewCount;
-        this.description = description;
-        this.deliveryEstimate = deliveryEstimate;
-        this.sellerUid = sellerUid;
-    }
-
-    // Parcelable constructor
+    // Parcelable implementation
     protected Product(Parcel in) {
         id = in.readInt();
         name = in.readString();
@@ -98,10 +62,8 @@ public class Product implements Parcelable {
         reviewCount = in.readInt();
         description = in.readString();
         deliveryEstimate = in.readString();
-        sellerUid = in.readString();  // read sellerUid
     }
 
-    // Parcelable creator
     public static final Creator<Product> CREATOR = new Creator<Product>() {
         @Override
         public Product createFromParcel(Parcel in) {
@@ -114,7 +76,6 @@ public class Product implements Parcelable {
         }
     };
 
-    // Parcelable methods
     @Override
     public int describeContents() {
         return 0;
@@ -132,60 +93,22 @@ public class Product implements Parcelable {
         dest.writeInt(reviewCount);
         dest.writeString(description);
         dest.writeString(deliveryEstimate);
-        dest.writeString(sellerUid);  // write sellerUid
     }
 
-    // Getters and setters
-    public int getId() {
-        return id;
-    }
+    // Getters for all fields
+    public int getId() { return id; }
+    public String getName() { return name; }
+    public String getImageName() { return imageName; }
+    public double getPrice() { return price; }
+    public double getOriginalPrice() { return originalPrice; }
+    public int getSoldCount() { return soldCount; }
+    public float getRating() { return rating; }
+    public int getReviewCount() { return reviewCount; }
+    public String getDescription() { return description; }
+    public String getDeliveryEstimate() { return deliveryEstimate; }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getImageName() {
-        return imageName;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public double getOriginalPrice() {
-        return originalPrice;
-    }
-
-    public int getSoldCount() {
-        return soldCount;
-    }
-
-    public float getRating() {
-        return rating;
-    }
-
-    public int getReviewCount() {
-        return reviewCount;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getDeliveryEstimate() {
-        return deliveryEstimate;
-    }
-
-    public String getSellerUid() {
-        return sellerUid;
-    }
-
-    public void setSellerUid(String sellerUid) {
-        this.sellerUid = sellerUid;
-    }
-
-    // Helper method for loading image from server
+    // Helper method for image URL
     public String getImageUrl() {
-        return "http://10.10.10.147/AncientCrafts_productImg/" + imageName;
+        return "http://20.0.0.176/AncientCrafts_productImg/" + imageName;
     }
 }
