@@ -26,7 +26,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public ProductAdapter(List<Product> productList, Context context, int placeholderImageResId) {
         this.productList = productList;
         this.context = context;
-        this.placeholderImageResId = placeholderImageResId;
+        this.placeholderImageResId = R.drawable.placeholder_image;
     }
 
     @NonNull

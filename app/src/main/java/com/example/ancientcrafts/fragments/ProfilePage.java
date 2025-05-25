@@ -134,28 +134,32 @@ public class ProfilePage extends Fragment {
                             sellBtn.setVisibility(View.VISIBLE);
                             sellBtnText.setText("Start Selling");
                             sellBtn.setOnClickListener(v -> {
-                                new AlertDialog.Builder(requireContext())
-                                        .setTitle("Become a Seller")
-                                        .setMessage("Are you sure you want to start selling?")
-                                        .setPositiveButton("Yes", (dialog, which) -> {
-                                            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-                                            if (currentUser != null) {
-                                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(currentUser.getUid());
-                                                ref.child("isSeller").setValue(true).addOnCompleteListener(task -> {
-                                                    if (task.isSuccessful()) {
-                                                        Toast.makeText(getContext(), "You are now a seller!", Toast.LENGTH_SHORT).show();
-                                                        startActivity(new Intent(getActivity(), AddProductActivity.class));
-                                                    } else {
-                                                        Toast.makeText(getContext(), "Failed to update seller status", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                });
+                                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                                if (currentUser != null) {
+                                    String uid = currentUser.getUid();
+                                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(uid);
+
+                                    ref.child("isSeller").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            Boolean isSeller = snapshot.getValue(Boolean.class);
+                                            if (Boolean.TRUE.equals(isSeller)) {
+                                                // Already seller
+                                                startActivity(new Intent(getActivity(), AddProductActivity.class));
+                                            } else {
+                                                // Launch fake ID verification
+                                                startActivity(new Intent(getActivity(), com.example.ancientcrafts.FakeVerificationActivity.class));
                                             }
-                                        })
-                                        .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
-                                        .show();
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                            Toast.makeText(getContext(), "Failed to check seller status", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
                             });
                         }
-
                     }
                 }
 

@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -17,93 +16,97 @@
         android:theme="@style/Theme.AncientCrafts"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
-        <activity android:name=".Order"
+        <activity
+            android:name=".FakeVerificationActivity"
             android:exported="false" />
-        <activity android:name=".AddProductActivity"
+        <activity
+            android:name=".Order"
             android:exported="false" />
-
-        <activity android:name=".SettingsActivity"
+        <activity
+            android:name=".AddProductActivity"
             android:exported="false" />
-
-        <activity android:name=".HelpCenterActivity"
+        <activity
+            android:name=".SettingsActivity"
             android:exported="false" />
-
-        <activity android:name=".FavoriteProducts"
+        <activity
+            android:name=".HelpCenterActivity"
             android:exported="false" />
-
-        <activity android:name=".CartProducts"
+        <activity
+            android:name=".FavoriteProducts"
             android:exported="false" />
-
-        <activity android:name=".ChatActivity"
+        <activity
+            android:name=".CartProducts"
             android:exported="false" />
-
-        <activity android:name=".ToPayActivity"
+        <activity
+            android:name=".ChatActivity"
             android:exported="false" />
-
-        <activity android:name=".ToShipActivity"
+        <activity
+            android:name=".ToPayActivity"
             android:exported="false" />
-
-        <activity android:name=".ToReceiveActivity"
+        <activity
+            android:name=".ToShipActivity"
             android:exported="false" />
-
-        <activity android:name=".ToRateActivity"
+        <activity
+            android:name=".ToReceiveActivity"
             android:exported="false" />
-
-        <activity android:name=".PurchaseHistoryActivity"
+        <activity
+            android:name=".ToRateActivity"
             android:exported="false" />
-
-        <activity android:name=".MyCouponsActivity"
+        <activity
+            android:name=".PurchaseHistoryActivity"
             android:exported="false" />
-
-        <activity android:name=".RedeemCodesActivity"
+        <activity
+            android:name=".MyCouponsActivity"
             android:exported="false" />
-
-        <activity android:name=".HomeActivity"
+        <activity
+            android:name=".RedeemCodesActivity"
             android:exported="false" />
-
-        <activity android:name=".GetStartedActivity"
+        <activity
+            android:name=".HomeActivity"
             android:exported="false" />
-
-        <activity android:name=".GetStartedActivityTwo"
+        <activity
+            android:name=".GetStartedActivity"
             android:exported="false" />
-
-        <activity android:name=".GetStartedActivityThree"
+        <activity
+            android:name=".GetStartedActivityTwo"
             android:exported="false" />
-
-        <activity android:name=".GetStartedActivityFour"
+        <activity
+            android:name=".GetStartedActivityThree"
             android:exported="false" />
-
-        <activity android:name=".ProductView"
+        <activity
+            android:name=".GetStartedActivityFour"
             android:exported="false" />
-
-        <activity android:name=".SellerPage"
+        <activity
+            android:name=".ProductView"
             android:exported="false" />
-
-        <activity android:name=".OrdersItem"
+        <activity
+            android:name=".SellerPage"
             android:exported="false" />
-
-        <activity android:name=".ProductsItem"
+        <activity
+            android:name=".OrdersItem"
             android:exported="false" />
-
-        <activity android:name=".AnalyticsActivity"
+        <activity
+            android:name=".ProductsItem"
             android:exported="false" />
-
-
-
-        <activity android:name=".RegisterActivity"
+        <activity
+            android:name=".AnalyticsActivity"
             android:exported="false" />
-
-        <activity android:name=".Splashscreen"
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Splashscreen"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
-            android:exported="false"/>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

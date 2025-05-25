@@ -15,6 +15,9 @@ public class Product implements Parcelable {
     private String description;
     private String deliveryEstimate;
     private String sellerUid; // NEW FIELD
+    private int stock;           // NEW: stock quantity
+    private long timestamp;      // NEW: date/time when product was added
+
 
     // No-argument constructor required for Firebase
     public Product() {
@@ -34,6 +37,8 @@ public class Product implements Parcelable {
         this.description = "Premium quality product";
         this.deliveryEstimate = "3-5 days";
         this.sellerUid = sellerUid;
+        this.stock = stock;
+        this.timestamp = timestamp;
     }
 
     // Full constructor
@@ -67,6 +72,8 @@ public class Product implements Parcelable {
         description = in.readString();
         deliveryEstimate = in.readString();
         sellerUid = in.readString(); // NEW
+        stock = in.readInt();
+        timestamp = in.readLong();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -99,6 +106,8 @@ public class Product implements Parcelable {
         dest.writeString(description);
         dest.writeString(deliveryEstimate);
         dest.writeString(sellerUid); // NEW
+        dest.writeInt(stock);
+        dest.writeLong(timestamp);
     }
 
     // Getters
@@ -118,7 +127,21 @@ public class Product implements Parcelable {
     public void setSellerUid(String sellerUid) {
         this.sellerUid = sellerUid;
     }
+    public int getStock() {
+        return stock;
+    }
 
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
     // Helper method for image URL
     public String getImageUrl() {
         return "http://192.168.8.38/AncientCrafts_productImg/" + imageName;
