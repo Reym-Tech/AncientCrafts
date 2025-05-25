@@ -10,14 +10,11 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.InputType;
 import android.util.Base64;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -65,7 +62,6 @@ public class ProfilePage extends Fragment {
     private String userId;
     private TextView addressText;
 
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -100,6 +96,7 @@ public class ProfilePage extends Fragment {
             userId = user.getUid();
             userRef = FirebaseDatabase.getInstance().getReference("users").child(userId);
 
+            // Load user info
             userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -108,13 +105,14 @@ public class ProfilePage extends Fragment {
                         String email = snapshot.child("email").getValue(String.class);
                         String phone = snapshot.child("phone_number").getValue(String.class);
                         String imageUrl = snapshot.child("profile_image").getValue(String.class);
+                        Boolean isSeller = snapshot.child("isSeller").getValue(Boolean.class);
 
                         profileName.setText(name != null ? name : "No Name");
                         profileEmail.setText(email != null ? email : "No Email");
                         profilePNumber.setText(phone != null ? phone : "No Phone");
 
                         if (imageUrl != null && !imageUrl.isEmpty()) {
-                            String imageFullUrl = "http://192.168.137.70/AncientCrafts_profileImg/" + imageUrl;
+                            String imageFullUrl = "http://192.168.8.38/AncientCrafts_profileImg/" + imageUrl;
                             Glide.with(requireContext())
                                     .load(imageFullUrl)
                                     .circleCrop()
@@ -122,6 +120,42 @@ public class ProfilePage extends Fragment {
                                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                                     .into(profileImage);
                         }
+
+                        // Check if user is a seller
+                        TextView sellBtnText = view.findViewById(R.id.sellBtnText); // Add a TextView inside sellBtn in XML with this ID
+
+                        if (isSeller != null && isSeller) {
+                            sellBtn.setVisibility(View.VISIBLE);
+                            sellBtnText.setText("Manage Products");
+                            sellBtn.setOnClickListener(v -> {
+                                startActivity(new Intent(getActivity(), AddProductActivity.class));
+                            });
+                        } else {
+                            sellBtn.setVisibility(View.VISIBLE);
+                            sellBtnText.setText("Start Selling");
+                            sellBtn.setOnClickListener(v -> {
+                                new AlertDialog.Builder(requireContext())
+                                        .setTitle("Become a Seller")
+                                        .setMessage("Are you sure you want to start selling?")
+                                        .setPositiveButton("Yes", (dialog, which) -> {
+                                            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                                            if (currentUser != null) {
+                                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(currentUser.getUid());
+                                                ref.child("isSeller").setValue(true).addOnCompleteListener(task -> {
+                                                    if (task.isSuccessful()) {
+                                                        Toast.makeText(getContext(), "You are now a seller!", Toast.LENGTH_SHORT).show();
+                                                        startActivity(new Intent(getActivity(), AddProductActivity.class));
+                                                    } else {
+                                                        Toast.makeText(getContext(), "Failed to update seller status", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                            }
+                                        })
+                                        .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                                        .show();
+                            });
+                        }
+
                     }
                 }
 
@@ -153,7 +187,8 @@ public class ProfilePage extends Fragment {
         profileImage.setOnClickListener(v -> chooseImage());
         view.findViewById(R.id.addressSection).setOnClickListener(v -> showAddressDialog());
         menuBtn.setOnClickListener(this::showCustomPopup);
-        sellBtn.setOnClickListener(v -> startActivity(new Intent(getActivity(), AddProductActivity.class)));
+
+        // Other click listeners
         favBtn.setOnClickListener(v -> startActivity(new Intent(getActivity(), FavoriteProducts.class)));
         cartBtn.setOnClickListener(v -> startActivity(new Intent(getActivity(), CartProducts.class)));
         chatBtn.setOnClickListener(v -> startActivity(new Intent(getActivity(), ChatActivity.class)));
@@ -194,7 +229,6 @@ public class ProfilePage extends Fragment {
         builder.show();
     }
 
-
     private void chooseImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -203,7 +237,7 @@ public class ProfilePage extends Fragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == -1 && data != null && data.getData() != null) {
             Uri filePath = data.getData();
@@ -226,101 +260,64 @@ public class ProfilePage extends Fragment {
 
         StringRequest request = new StringRequest(
                 Request.Method.POST,
-                "http://192.168.137.70/AncientCrafts_profileImg/upload.php",
+                "http://192.168.8.38/AncientCrafts_profileImg/upload.php",
                 response -> {
                     dialog.dismiss();
                     FirebaseDatabase.getInstance().getReference("users")
                             .child(userId)
                             .child("profile_image")
-                            .setValue(imageName)
-                            .addOnCompleteListener(task -> {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(getContext(), "Profile image updated!", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(getContext(), "Failed to save image info to database", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                            .setValue(imageName);
+                    Toast.makeText(getContext(), "Profile image updated", Toast.LENGTH_SHORT).show();
                 },
                 error -> {
                     dialog.dismiss();
-                    Toast.makeText(getContext(), "Upload error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Upload failed: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
         ) {
             @Override
-            protected java.util.Map<String, String> getParams() {
+            protected HashMap<String, String> getParams() {
                 HashMap<String, String> params = new HashMap<>();
                 params.put("image", base64Image);
                 params.put("name", imageName);
                 return params;
             }
         };
-
         Volley.newRequestQueue(requireContext()).add(request);
     }
 
     private String bitmapToBase64(Bitmap bitmap) {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);
-        byte[] imageBytes = stream.toByteArray();
-        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+        byte[] bytes = baos.toByteArray();
+        return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
 
-    private void showCustomPopup(View anchorView) {
-        LayoutInflater inflater = (LayoutInflater) requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.custom_popup_menu, null);
+    private void showCustomPopup(View anchor) {
+        View popupView = LayoutInflater.from(getContext()).inflate(R.layout.custom_popup_menu, null);
+        PopupWindow popupWindow = new PopupWindow(popupView,
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                true);
 
-        final PopupWindow popupWindow = new PopupWindow(
-                popupView,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                true
-        );
-
-        popupWindow.setElevation(8.0f);
         popupWindow.setOutsideTouchable(true);
+        popupWindow.setFocusable(true);
+        popupWindow.showAsDropDown(anchor);
 
-        // Set up button listeners
-        ImageView settingsBtn = popupView.findViewById(R.id.menu_settings);
-        ImageView supportBtn = popupView.findViewById(R.id.menu_support);
-        ImageView logoutBtn = popupView.findViewById(R.id.menu_logout);
-
-        settingsBtn.setOnClickListener(v -> {
-            openSettings();
+        popupView.findViewById(R.id.menu_settings).setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), SettingsActivity.class));
             popupWindow.dismiss();
         });
 
-        supportBtn.setOnClickListener(v -> {
-            openHelpCenter();
+        popupView.findViewById(R.id.menu_help).setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), HelpCenterActivity.class));
             popupWindow.dismiss();
         });
 
-        logoutBtn.setOnClickListener(v -> {
-            logoutUser();
+        popupView.findViewById(R.id.menu_logout).setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(getActivity(), MainActivity.class));
+            requireActivity().finish();
             popupWindow.dismiss();
         });
-
-        // Show the popup window below the anchor view
-        popupWindow.showAsDropDown(anchorView, -50, 10);  // adjust X and Y offset as needed
-    }
-
-
-
-    private void openSettings() {
-        Intent intent = new Intent(getActivity(), SettingsActivity.class);
-        startActivity(intent);
-    }
-
-    private void openHelpCenter() {
-        Intent intent = new Intent(getActivity(), HelpCenterActivity.class);
-        startActivity(intent);
-    }
-
-    private void logoutUser() {
-        requireActivity().getSharedPreferences("user_session", Context.MODE_PRIVATE)
-                .edit().clear().apply();
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        requireActivity().finish();
     }
 }

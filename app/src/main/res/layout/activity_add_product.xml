@@ -7,95 +7,218 @@
     android:fillViewport="true">
 
     <LinearLayout
-        android:id="@+id/linear"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="top">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <!-- Top Profile Section -->
+        <!-- Top Header -->
         <RelativeLayout
-            android:id="@+id/profile_DB"
             android:layout_width="match_parent"
             android:layout_height="130dp"
-            android:background="@color/darkbrown"
-            android:layout_marginBottom="50dp">
-
-            <ImageView
-                android:id="@+id/menu_Btn"
-                android:layout_width="25dp"
-                android:layout_height="35dp"
-                android:background="@drawable/menu_icon"
-                android:backgroundTint="@color/brown"
-                android:layout_margin="15dp" />
-
-            <ImageView
-                android:id="@+id/profile_pic"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/baseline_account_circle_24"
-                android:backgroundTint="@color/brown"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="60dp" />
+            android:background="@color/darkbrown">
 
             <TextView
-                android:id="@+id/email_holder"
+                android:id="@+id/seller_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="gjohnremy@gmail.com"
+                android:text="My Shop"
+                android:textSize="24sp"
+                android:textStyle="bold"
                 android:textColor="@color/brown"
-                android:layout_marginLeft="110dp"
-                android:layout_marginTop="65dp" />
+                android:layout_centerInParent="true" />
 
-            <TextView
-                android:id="@+id/number_holder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="096*****520"
-                android:textColor="@color/brown"
-                android:layout_marginLeft="110dp"
-                android:layout_marginTop="85dp" />
-
-            <ImageView
-                android:id="@+id/fav_Btn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/favourite_icon"
-                android:backgroundTint="@color/brown"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="115dp"
-                android:layout_marginTop="17dp" />
-
-            <ImageView
-                android:id="@+id/cart_Btn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/cart"
-                android:backgroundTint="@color/brown"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="65dp"
-                android:layout_marginTop="18dp" />
-
-            <ImageView
-                android:id="@+id/message_Btn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/message_icon"
-                android:backgroundTint="@color/brown"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="17dp" />
         </RelativeLayout>
 
-        <!-- Input Section -->
-        <LinearLayout
-            android:orientation="vertical"
+        <!-- Profile Card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="12dp"
+            android:backgroundTint="@color/darkbrown">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/seller_profile_image"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/baseline_account_circle_24"
+                    android:backgroundTint="@color/brown" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Hi!"
+                    android:textSize="18sp"
+                    android:textColor="@color/brown"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/seller_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="110dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Name"
+                    android:textSize="18sp"
+                    android:textColor="@color/brown"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/seller_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="90dp"
+                    android:layout_marginTop="65dp"
+                    android:text="Email"
+                    android:textColor="@color/brown" />
+
+                <TextView
+                    android:id="@+id/seller_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="90dp"
+                    android:layout_marginTop="85dp"
+                    android:text="Phone Number"
+                    android:textColor="@color/brown" />
+
+                <LinearLayout
+                    android:id="@+id/addressSection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="75dp"
+                    android:layout_marginTop="90dp"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:id="@+id/seller_address"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Add Address"
+                        android:textColor="@color/brown" />
+                </LinearLayout>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Shop Menu Card -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="12dp"
+            android:backgroundTint="@color/darkbrown">
 
-            <!-- Product Name -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="15dp"
+                android:gravity="center_horizontal"
+                android:weightSum="4">
+
+                <!-- Orders -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <Button
+                        android:id="@+id/btn_view_orders"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/cart"
+                        app:backgroundTint="@color/brown" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Orders"
+                        android:textColor="@color/brown" />
+                </LinearLayout>
+
+                <!-- Products -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <Button
+                        android:id="@+id/btn_view_products"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/package_icon"
+                        app:backgroundTint="@color/brown" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Products"
+                        android:textColor="@color/brown" />
+                </LinearLayout>
+
+                <!-- Analytics -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <Button
+                        android:id="@+id/btn_analytics"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/analytics_icon"
+                        app:backgroundTint="@color/brown" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Analytics"
+                        android:textColor="@color/brown" />
+                </LinearLayout>
+
+                <!-- Messages -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <Button
+                        android:id="@+id/btn_view_messages"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/message_icon"
+                        app:backgroundTint="@color/brown" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Messages"
+                        android:textColor="@color/brown" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Product Management Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="20dp">
+
+            <!-- Input Fields -->
             <EditText
                 android:id="@+id/edit_name"
                 android:layout_width="match_parent"
@@ -105,7 +228,6 @@
                 android:textColor="@color/darkbrown"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Product Price -->
             <EditText
                 android:id="@+id/edit_price"
                 android:layout_width="match_parent"
@@ -116,7 +238,6 @@
                 android:textColor="@color/darkbrown"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Image Preview -->
             <ImageView
                 android:id="@+id/image_preview"
                 android:layout_width="200dp"
@@ -126,7 +247,6 @@
                 android:src="@color/white"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Choose Image Button -->
             <Button
                 android:id="@+id/btn_choose_image"
                 android:layout_width="wrap_content"
@@ -135,7 +255,6 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Submit Button -->
             <Button
                 android:id="@+id/btn_submit"
                 android:layout_width="wrap_content"
@@ -146,7 +265,6 @@
                 android:backgroundTint="@color/darkbrown"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Restock Button -->
             <Button
                 android:id="@+id/btn_restock"
                 android:layout_width="wrap_content"
@@ -158,35 +276,35 @@
                 android:layout_marginBottom="24dp" />
         </LinearLayout>
 
-        <!-- Products Section -->
-        <LinearLayout
-            android:id="@+id/products_section"
+        <!-- Product List Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Products"
+            android:textColor="@color/darkbrown"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="8dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_products"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:nestedScrollingEnabled="false"
             android:layout_marginBottom="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_marginHorizontal="10dp" />
 
-            <!-- Title for Products -->
-            <TextView
-                android:id="@+id/your_products_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Your Products"
-                android:textColor="@color/darkbrown"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:layout_marginBottom="8dp" />
+        <!-- Optional: Featured Products -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Featured Products"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/brown"
+            android:layout_margin="10dp" />
 
-            <!-- RecyclerView to display seller's products -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_products"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                android:layout_marginBottom="24dp" />
-        </LinearLayout>
-
+        <!-- Add more cards here if needed -->
     </LinearLayout>
 </ScrollView>

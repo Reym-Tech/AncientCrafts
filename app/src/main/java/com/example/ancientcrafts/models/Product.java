@@ -14,30 +14,33 @@ public class Product implements Parcelable {
     private int reviewCount;
     private String description;
     private String deliveryEstimate;
+    private String sellerUid; // NEW FIELD
 
     // No-argument constructor required for Firebase
     public Product() {
         // Default constructor for Firebase
     }
 
-    // Original constructor (for dashboard compatibility)
-    public Product(int id, String name, String imageName, double price) {
+    // Constructor for dashboard or simple usage
+    public Product(int id, String name, String imageName, double price, String sellerUid) {
         this.id = id;
         this.name = name;
         this.imageName = imageName;
         this.price = price;
-        this.originalPrice = price * 1.5; // Default calculation
+        this.originalPrice = price * 1.5;
         this.soldCount = 0;
         this.rating = 4.0f;
         this.reviewCount = 0;
         this.description = "Premium quality product";
         this.deliveryEstimate = "3-5 days";
+        this.sellerUid = sellerUid;
     }
 
-    // Full constructor with all fields
+    // Full constructor
     public Product(int id, String name, String imageName, double price,
                    double originalPrice, int soldCount, float rating,
-                   int reviewCount, String description, String deliveryEstimate) {
+                   int reviewCount, String description, String deliveryEstimate,
+                   String sellerUid) {
         this.id = id;
         this.name = name;
         this.imageName = imageName;
@@ -48,6 +51,7 @@ public class Product implements Parcelable {
         this.reviewCount = reviewCount;
         this.description = description;
         this.deliveryEstimate = deliveryEstimate;
+        this.sellerUid = sellerUid;
     }
 
     // Parcelable implementation
@@ -62,6 +66,7 @@ public class Product implements Parcelable {
         reviewCount = in.readInt();
         description = in.readString();
         deliveryEstimate = in.readString();
+        sellerUid = in.readString(); // NEW
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -93,9 +98,10 @@ public class Product implements Parcelable {
         dest.writeInt(reviewCount);
         dest.writeString(description);
         dest.writeString(deliveryEstimate);
+        dest.writeString(sellerUid); // NEW
     }
 
-    // Getters for all fields
+    // Getters
     public int getId() { return id; }
     public String getName() { return name; }
     public String getImageName() { return imageName; }
@@ -106,9 +112,15 @@ public class Product implements Parcelable {
     public int getReviewCount() { return reviewCount; }
     public String getDescription() { return description; }
     public String getDeliveryEstimate() { return deliveryEstimate; }
+    public String getSellerUid() { return sellerUid; } // NEW
+
+    // Setters
+    public void setSellerUid(String sellerUid) {
+        this.sellerUid = sellerUid;
+    }
 
     // Helper method for image URL
     public String getImageUrl() {
-        return "http://20.0.0.176/AncientCrafts_productImg/" + imageName;
+        return "http://192.168.8.38/AncientCrafts_productImg/" + imageName;
     }
 }

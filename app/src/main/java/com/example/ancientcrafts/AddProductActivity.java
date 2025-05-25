@@ -10,11 +10,18 @@ import android.util.Base64;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.ancientcrafts.models.Product;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -22,20 +29,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-
 public class AddProductActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
 
+    private TextView sellerNameTextView, sellerEmailTextView, sellerNumberTextView, sellerAddressTextView;
     private EditText editName, editPrice;
-    private ImageView selectedImageView;
-    private Button btnChooseImage, btnSubmit;
+    private ImageView selectedImageView, sellerProfileImageView;
+    private Button btnChooseImage, btnSubmit, btnViewOrders, btnViewProducts, btnAnalytics;
     private Bitmap selectedBitmap;
 
     private DatabaseReference productsRef;
@@ -50,6 +50,14 @@ public class AddProductActivity extends AppCompatActivity {
         selectedImageView = findViewById(R.id.image_preview);
         btnChooseImage = findViewById(R.id.btn_choose_image);
         btnSubmit = findViewById(R.id.btn_submit);
+        btnViewOrders = findViewById(R.id.btn_view_orders);
+        btnViewProducts = findViewById(R.id.btn_view_products);
+        btnAnalytics = findViewById(R.id.btn_analytics);
+        sellerProfileImageView = findViewById(R.id.seller_profile_image);
+        sellerNameTextView = findViewById(R.id.seller_name);
+        sellerEmailTextView = findViewById(R.id.seller_email);
+        sellerNumberTextView = findViewById(R.id.seller_number);
+        sellerAddressTextView = findViewById(R.id.seller_address);
 
         productsRef = FirebaseDatabase.getInstance().getReference("products");
 
@@ -62,6 +70,51 @@ public class AddProductActivity extends AppCompatActivity {
                 uploadProduct();
             }
         });
+
+        btnViewOrders.setOnClickListener(v -> {
+            Intent intent = new Intent(AddProductActivity.this, OrdersItem.class);
+            startActivity(intent);
+        });
+
+        btnViewProducts.setOnClickListener(v -> {
+            Intent intent = new Intent(AddProductActivity.this, ProductsItem.class);
+            startActivity(intent);
+        });
+
+        btnAnalytics.setOnClickListener(v -> {
+            Intent intent = new Intent(AddProductActivity.this, AnalyticsActivity.class);
+            startActivity(intent);
+        });
+        // Fetch and display seller name and email
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
+            userRef.get().addOnSuccessListener(snapshot -> {
+                if (snapshot.exists()) {
+                    String name = snapshot.child("first_name").getValue(String.class);
+                    String email = snapshot.child("email").getValue(String.class);
+                    String number = snapshot.child("phone_number").getValue(String.class);
+                    String address = snapshot.child("address").getValue(String.class);
+
+                    sellerNameTextView.setText(" " + name);
+                    sellerEmailTextView.setText("Email: " + email);
+                    sellerNumberTextView.setText("Phone: " + number);
+                    sellerAddressTextView.setText("Address: " + address);
+
+                    String profileImageUrl = snapshot.child("profile_image").getValue(String.class);
+                    if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
+                        Glide.with(AddProductActivity.this)
+                                .load("http://192.168.8.38/AncientCrafts_profileImg/" + profileImageUrl)
+                                .placeholder(R.drawable.baseline_account_circle_24)
+                                .circleCrop()
+                                .into(sellerProfileImageView);
+                    }
+                }
+            }).addOnFailureListener(e -> {
+                Toast.makeText(AddProductActivity.this, "Failed to load seller info", Toast.LENGTH_SHORT).show();
+            });
+        }
+
     }
 
     private void chooseImage() {
@@ -81,6 +134,7 @@ public class AddProductActivity extends AppCompatActivity {
                 selectedImageView.setImageBitmap(selectedBitmap);
             } catch (IOException e) {
                 e.printStackTrace();
+                Toast.makeText(this, "Failed to load image", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -94,6 +148,13 @@ public class AddProductActivity extends AppCompatActivity {
             return;
         }
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String sellerUid = user.getUid();  // Get current user's UID
+
         ProgressDialog dialog = ProgressDialog.show(this, "Uploading", "Please wait...", true);
 
         String base64Image = bitmapToBase64(selectedBitmap);
@@ -101,14 +162,27 @@ public class AddProductActivity extends AppCompatActivity {
 
         StringRequest request = new StringRequest(
                 Request.Method.POST,
-                "http://10.10.10.147/AncientCrafts_productImg/upload.php" ,
+                "http://192.168.8.38/AncientCrafts_productImg/upload.php",
                 response -> {
                     dialog.dismiss();
-                    String imageUrl = imageName;
 
                     double price = Double.parseDouble(priceStr);
                     int id = (int) (System.currentTimeMillis() / 1000);
-                    Product product = new Product(id, name, imageUrl, price);
+
+                    // Use full constructor with all params
+                    Product product = new Product(
+                            id,
+                            name,
+                            imageName,
+                            price,
+                            price * 1.5,       // originalPrice
+                            0,                 // soldCount
+                            4.0f,              // rating
+                            0,                 // reviewCount
+                            "Premium quality product", // description
+                            "3-5 days",               // deliveryEstimate
+                            sellerUid          // seller UID
+                    );
 
                     productsRef.child(String.valueOf(id)).setValue(product)
                             .addOnSuccessListener(aVoid -> {

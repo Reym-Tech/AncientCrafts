@@ -80,6 +80,17 @@
         <activity android:name=".SellerPage"
             android:exported="false" />
 
+        <activity android:name=".OrdersItem"
+            android:exported="false" />
+
+        <activity android:name=".ProductsItem"
+            android:exported="false" />
+
+        <activity android:name=".AnalyticsActivity"
+            android:exported="false" />
+
+
+
         <activity android:name=".RegisterActivity"
             android:exported="false" />
 
