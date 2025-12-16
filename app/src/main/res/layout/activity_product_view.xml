@@ -62,15 +62,24 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="8dp" />
 
-                <!-- Product Price -->
-                <TextView
-                    android:id="@+id/product_discPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="₱0.00"
-                    android:textColor="@color/brown"
-                    android:textSize="20sp"
-                    android:layout_marginBottom="16dp" />
+                    <!-- Product Price -->
+                    <TextView
+                        android:id="@+id/product_discPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="₱0.00"
+                        android:textColor="@color/brown"
+                        android:textSize="20sp"
+                        android:layout_marginBottom="16dp" />
+
+                    <TextView
+                        android:id="@+id/product_stock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Stock: 274"
+                        android:textSize="14sp"
+                        android:textColor="@color/brown"
+                        android:layout_marginBottom="16dp" />
 
                 <!-- Description -->
                 <TextView

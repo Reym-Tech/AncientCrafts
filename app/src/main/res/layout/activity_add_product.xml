@@ -224,7 +224,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Product Name"
-                android:backgroundTint="@color/darkbrown"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
                 android:textColor="@color/darkbrown"
                 android:layout_marginBottom="16dp" />
 
@@ -234,9 +235,22 @@
                 android:layout_height="wrap_content"
                 android:hint="Price"
                 android:inputType="numberDecimal"
-                android:backgroundTint="@color/darkbrown"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
                 android:textColor="@color/darkbrown"
                 android:layout_marginBottom="16dp" />
+
+            <EditText
+                android:id="@+id/stockInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Stock Available"
+                android:inputType="number"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/black" />
+
 
             <ImageView
                 android:id="@+id/image_preview"
@@ -252,6 +266,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Choose Image"
+                android:textStyle="bold"
+                android:textColor="@color/brown"
+                android:backgroundTint="@color/darkbrown"
                 android:layout_gravity="center"
                 android:layout_marginBottom="16dp" />
 
@@ -265,46 +282,6 @@
                 android:backgroundTint="@color/darkbrown"
                 android:layout_marginBottom="16dp" />
 
-            <Button
-                android:id="@+id/btn_restock"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Restock Product"
-                android:textStyle="bold"
-                android:textColor="@color/brown"
-                android:backgroundTint="@color/darkbrown"
-                android:layout_marginBottom="24dp" />
         </LinearLayout>
-
-        <!-- Product List Section -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Your Products"
-            android:textColor="@color/darkbrown"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="8dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_products"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
-            android:layout_marginBottom="30dp"
-            android:layout_marginHorizontal="10dp" />
-
-        <!-- Optional: Featured Products -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Featured Products"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/brown"
-            android:layout_margin="10dp" />
-
-        <!-- Add more cards here if needed -->
     </LinearLayout>
 </ScrollView>

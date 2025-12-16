@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
 import com.example.ancientcrafts.models.Product;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,7 +33,7 @@ public class AddProductActivity extends AppCompatActivity {
 
     private TextView sellerNameTextView, sellerEmailTextView, sellerNumberTextView, sellerAddressTextView;
     private EditText editName, editPrice;
-    private ImageView selectedImageView, sellerProfileImageView;
+    private ImageView selectedImageView;
     private Button btnChooseImage, btnSubmit, btnViewOrders, btnViewProducts, btnAnalytics;
     private Bitmap selectedBitmap;
 
@@ -53,11 +52,11 @@ public class AddProductActivity extends AppCompatActivity {
         btnViewOrders = findViewById(R.id.btn_view_orders);
         btnViewProducts = findViewById(R.id.btn_view_products);
         btnAnalytics = findViewById(R.id.btn_analytics);
-        sellerProfileImageView = findViewById(R.id.seller_profile_image);
         sellerNameTextView = findViewById(R.id.seller_name);
         sellerEmailTextView = findViewById(R.id.seller_email);
         sellerNumberTextView = findViewById(R.id.seller_number);
         sellerAddressTextView = findViewById(R.id.seller_address);
+
 
         productsRef = FirebaseDatabase.getInstance().getReference("products");
 
@@ -100,15 +99,6 @@ public class AddProductActivity extends AppCompatActivity {
                     sellerEmailTextView.setText("Email: " + email);
                     sellerNumberTextView.setText("Phone: " + number);
                     sellerAddressTextView.setText("Address: " + address);
-
-                    String profileImageUrl = snapshot.child("profile_image").getValue(String.class);
-                    if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
-                        Glide.with(AddProductActivity.this)
-                                .load("http://192.168.8.38/AncientCrafts_profileImg/" + profileImageUrl)
-                                .placeholder(R.drawable.baseline_account_circle_24)
-                                .circleCrop()
-                                .into(sellerProfileImageView);
-                    }
                 }
             }).addOnFailureListener(e -> {
                 Toast.makeText(AddProductActivity.this, "Failed to load seller info", Toast.LENGTH_SHORT).show();

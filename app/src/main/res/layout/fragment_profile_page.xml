@@ -419,7 +419,7 @@
                                 <ImageView
                                     android:layout_width="70dp"
                                     android:layout_height="120dp"
-                                    android:background="@drawable/amish_jericho_cutout_back_dining_chair_removebg_preview__1_"
+                                    android:background="@drawable/bamboo_shelf"
                                     android:layout_gravity="center" />
 
                                 <TextView
@@ -434,7 +434,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="₱ 750"
+                                    android:text="₱ 150"
                                     android:textColor="@color/darkbrown"
                                     android:textSize="28sp"
                                     android:layout_marginTop="70dp"
@@ -443,18 +443,18 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="₱ 1,500"
+                                    android:text="₱ 300"
                                     android:textColor="@color/darkbrown"
                                     android:textSize="19sp"
                                     android:layout_marginTop="110dp"
                                     android:layout_marginLeft="55dp" />
 
                                 <ImageView
-                                    android:layout_width="60dp"
-                                    android:layout_height="20dp"
-                                    android:background="@drawable/line_icon"
+                                    android:layout_width="55dp"
+                                    android:layout_height="16dp"
+                                    android:layout_marginLeft="55dp"
                                     android:layout_marginTop="115dp"
-                                    android:layout_marginLeft="60dp" />
+                                    android:background="@drawable/line_icon" />
 
                                 <ImageView
                                     android:layout_width="30dp"
@@ -467,7 +467,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Classic Wooden Chair"
+                                    android:text="Bamboo Shelf"
                                     android:textColor="@color/darkbrown"
                                     android:textSize="12sp"
                                     android:layout_marginLeft="192dp"
@@ -482,14 +482,6 @@
                                     android:layout_marginTop="50dp"
                                     android:layout_marginLeft="210dp" />
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="210dp"
-                                    android:layout_marginTop="70dp"
-                                    android:text="• Comfortable"
-                                    android:textColor="@color/darkbrown"
-                                    android:textSize="17sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -497,7 +489,7 @@
                                     android:text="• Stylish"
                                     android:textColor="@color/darkbrown"
                                     android:textSize="17sp"
-                                    android:layout_marginTop="90dp"
+                                    android:layout_marginTop="70dp"
                                     android:layout_marginLeft="210dp" />
 
                                 <TextView
@@ -506,7 +498,7 @@
                                     android:text="• Versatile"
                                     android:textColor="@color/darkbrown"
                                     android:textSize="17sp"
-                                    android:layout_marginTop="110dp"
+                                    android:layout_marginTop="90dp"
                                     android:layout_marginLeft="210dp" />
 
                             </androidx.cardview.widget.CardView>

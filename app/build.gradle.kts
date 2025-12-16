@@ -69,6 +69,9 @@ dependencies {
     implementation("com.google.firebase:firebase-database")
     implementation("com.google.firebase:firebase-firestore") // uses BoM version
 
+    implementation("com.google.android.gms:play-services-tasks:18.0.3")
+
+
     // Networking
     implementation("com.android.volley:volley:1.2.1")
 

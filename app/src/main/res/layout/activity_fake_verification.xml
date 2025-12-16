@@ -28,12 +28,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Choose Image"
+        android:textStyle="bold"
+        android:textColor="@color/brown"
+        android:backgroundTint="@color/darkbrown"
         android:layout_marginTop="16dp" />
 
     <Button
         android:id="@+id/submitButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/brown"
+        android:backgroundTint="@color/darkbrown"
         android:text="Submit for Verification"
         android:layout_marginTop="24dp" />
 
@@ -42,6 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="I agree to the Terms and Conditions"
+        android:textColor="@color/darkbrown"
         android:layout_marginTop="16dp" />
 
 </LinearLayout>

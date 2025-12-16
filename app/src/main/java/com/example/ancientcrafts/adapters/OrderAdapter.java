@@ -20,16 +20,14 @@ import java.util.Locale;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
 
-    private Context context;
-    private List<OrderModel> orderList;
-    private OnOrderClickListener listener;
-
-    // Interface for handling clicks
     public interface OnOrderClickListener {
         void onOrderClick(OrderModel order);
     }
 
-    // Updated constructor
+    private final Context context;
+    private final List<OrderModel> orderList;
+    private final OnOrderClickListener listener;
+
     public OrderAdapter(Context context, List<OrderModel> orderList, OnOrderClickListener listener) {
         this.context = context;
         this.orderList = orderList;
@@ -46,10 +44,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         OrderModel order = orderList.get(position);
+        if (order == null) return;
 
-        holder.productName.setText(order.getProductName());
+        holder.productName.setText(order.getProductName() != null ? order.getProductName() : "No Name");
         holder.quantity.setText("Qty: " + order.getQuantity());
-        holder.totalPrice.setText("₱" + formatPrice(order.getTotalPrice()));
+        holder.totalPrice.setText(formatPrice(order.getTotalPrice()));
 
         Glide.with(context)
                 .load(order.getProductImageUrl())
@@ -59,7 +58,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
     @Override
     public int getItemCount() {
-        return orderList.size();
+        return orderList != null ? orderList.size() : 0;
     }
 
     public class OrderViewHolder extends RecyclerView.ViewHolder {
@@ -68,6 +67,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
+
             productImage = itemView.findViewById(R.id.imgOrderProduct);
             productName = itemView.findViewById(R.id.txtOrderProductName);
             quantity = itemView.findViewById(R.id.txtOrderQuantity);
@@ -83,6 +83,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     }
 
     private String formatPrice(double price) {
-        return NumberFormat.getNumberInstance(Locale.US).format(price);
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "PH"));
+        return currencyFormat.format(price);
     }
 }

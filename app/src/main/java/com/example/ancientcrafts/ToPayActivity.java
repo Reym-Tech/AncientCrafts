@@ -1,6 +1,5 @@
 package com.example.ancientcrafts;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -64,7 +63,7 @@ public class ToPayActivity extends AppCompatActivity implements OrderAdapter.OnO
         currentUserUid = currentUser.getUid();
         ordersRef = FirebaseDatabase.getInstance().getReference("orders");
 
-        adapter = new OrderAdapter(this, orderList, this); // Pass the listener
+        adapter = new OrderAdapter(this, orderList, this);
         recyclerView.setAdapter(adapter);
 
         loadToPayOrders();
@@ -72,18 +71,16 @@ public class ToPayActivity extends AppCompatActivity implements OrderAdapter.OnO
 
     private void loadToPayOrders() {
         ordersRef.orderByChild("buyerUid").equalTo(currentUserUid)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         orderList.clear();
                         for (DataSnapshot snap : snapshot.getChildren()) {
-                            String status = snap.child("orderStatus").getValue(String.class);
-                            if ("toPay".equals(status)) {
-                                OrderModel order = snap.getValue(OrderModel.class);
-                                if (order != null) {
-                                    order.setOrderId(snap.getKey()); // save Firebase key
-                                    orderList.add(order);
-                                }
+                            OrderModel order = snap.getValue(OrderModel.class);
+                            if (order != null &&
+                                    "toPay".equalsIgnoreCase(order.getOrderStatus())) {
+                                order.setOrderId(snap.getKey());
+                                orderList.add(order);
                             }
                         }
                         adapter.notifyDataSetChanged();
@@ -110,9 +107,7 @@ public class ToPayActivity extends AppCompatActivity implements OrderAdapter.OnO
         new AlertDialog.Builder(this)
                 .setTitle("Cancel Order")
                 .setMessage("Are you sure you want to cancel this order?")
-                .setPositiveButton("Yes", (dialog, which) -> {
-                    cancelOrder(order);
-                })
+                .setPositiveButton("Yes", (dialog, which) -> cancelOrder(order))
                 .setNegativeButton("No", null)
                 .show();
     }
